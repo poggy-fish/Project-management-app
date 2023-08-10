@@ -90,7 +90,7 @@ const HomePage = () => {
                                 Register
                             </Button>
                         </Box>
-                        {/* SIGN IN COMPONENT */}
+                        {/* SIGN IN FORM */}
                         <Box
                             component="form"
                             sx={{
@@ -106,6 +106,7 @@ const HomePage = () => {
                             <TextField id="outlined-password-input" label="Password" type="password" autoComplete="current-password"/>
                             <Button variant="contained" type="submit" size="large" sx={{ maxWidth: '7.5rem', p: '0.75rem 0', mt: '0.4rem', ml: 1,}}>Sign in</Button>
                         </Box>
+                        {/* REGISTRATION FORM */}
                         <Box
                             component="form"
                             sx={{
