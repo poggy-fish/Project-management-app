@@ -102,7 +102,7 @@ const HomePage = () => {
                             }}
                             autoComplete="on"
                         >
-                            <TextField required id="outlined-required" label="Email" />
+                            <TextField required id="outlined-required" label="Email" type="email" />
                             <TextField id="outlined-password-input" label="Password" type="password" autoComplete="current-password"/>
                             <Button variant="contained" type="submit" size="large" sx={{ maxWidth: '7.5rem', p: '0.75rem 0', mt: '0.4rem', ml: 1,}}>Sign in</Button>
                         </Box>
@@ -122,7 +122,7 @@ const HomePage = () => {
                             <TextField required id="outlined-required" label="Last name" />
                             <TextField id="outlined" label="Title" />
                             <TextField required id="outlined-required" label="Username" />
-                            <TextField required id="outlined-required" label="Email" />
+                            <TextField required id="outlined-required" label="Email" type="email" />
                             <TextField id="outlined-password-input" label="Password" type="password" autoComplete="current-password"/>
                             <TextField id="outlined-password-input" label="Confirm Password" type="password" autoComplete="current-password"/>
                             <Button variant="contained" type="submit" size="large" sx={{ maxWidth: '7.5rem', p: '0.75rem 0', mt: '0.4rem', ml: 1,}}>Register</Button>
