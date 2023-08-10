@@ -1,6 +1,11 @@
 import automationImg from '../src/media/data-ms-illustration.jpeg';
 import taskImg from '../src/media/illustration.png';
 import manageImg from '../src/media/manage_apps.png';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 export const services = {
     taskManagement: {
@@ -21,4 +26,27 @@ export const services = {
         streamlining your workflow and ensuring efficient task distribution within your organization.`,
         img: automationImg,
       }
+};
+
+export const socialIcons = {
+  linkedIn: {
+      icon: <LinkedInIcon sx={{ color: 'white', fontSize: '1.5rem'}} />,
+      link: 'https://www.linkedin.com'
+  },
+  instagram: {
+      icon: <InstagramIcon sx={{ color: 'white', fontSize: '1.5rem'}} />,
+      link: 'https://www.instagram.com'
+  },
+  facebook: {
+      icon: <FacebookIcon sx={{ color: 'white', fontSize: '1.5rem'}} />,
+      link: 'https://www.facebool.com'
+  },
+  twitter: {
+      icon: <TwitterIcon sx={{ color: 'white', fontSize: '1.5rem'}} />,
+      link: 'https://www.twitter.com'
+  },
+  youtube: {
+      icon: <YouTubeIcon sx={{ color: 'white', fontSize: '1.5rem'}} />,
+      link: 'https://www.youtube.com'
+  },
 };

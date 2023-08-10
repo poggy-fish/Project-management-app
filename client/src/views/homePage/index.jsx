@@ -1,9 +1,9 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
-import illustrationVideo from '../../media/illustration.mp4';
 import { services } from "../../objects";
-import BasicCard from "../../components/Card";
-import TextField from '@mui/material/TextField';
 import { useState } from "react";
+import illustrationVideo from '../../media/illustration.mp4';
+import { BasicCard } from "../../components/Card";
+import TextField from '@mui/material/TextField';
 
 const HomePage = () => {
     const isMobile = useMediaQuery('(max-width: 550px)');
@@ -123,8 +123,8 @@ const HomePage = () => {
                             <TextField id="outlined" label="Title" />
                             <TextField required id="outlined-required" label="Username" />
                             <TextField required id="outlined-required" label="Email" type="email" />
-                            <TextField id="outlined-password-input" label="Password" type="password" autoComplete="current-password"/>
-                            <TextField id="outlined-password-input" label="Confirm Password" type="password" autoComplete="current-password"/>
+                            <TextField required id="outlined-password-input" label="Password" type="password" autoComplete="current-password"/>
+                            <TextField required id="outlined-password-input" label="Confirm Password" type="password" autoComplete="current-password"/>
                             <Button variant="contained" type="submit" size="large" sx={{ maxWidth: '7.5rem', p: '0.75rem 0', mt: '0.4rem', ml: 1,}}>Register</Button>
                         </Box>
                     </Box>
@@ -138,7 +138,7 @@ const HomePage = () => {
                 </Box>
             </Box>
             {/* CARD COMPONENTS */}
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: isMobile ? '0.2rem' : isWideScreen ? '5rem' : '3rem', justifyContent: isWideScreen ? 'center' : 'start'}}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: isMobile ? '0.2rem' : isWideScreen ? '5rem' : '1.5rem', justifyContent: isWideScreen ? 'center' : 'start'}}>
                 {Object.keys(services).map((serviceKey => {
                     const service = services[serviceKey];
                     return (
@@ -146,7 +146,6 @@ const HomePage = () => {
                     );
                  }))}
             </Box>
-           
         </Box>
     );
 };

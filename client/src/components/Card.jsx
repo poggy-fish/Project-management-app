@@ -3,10 +3,11 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { Link } from '@mui/material';
 
-const BasicCard = ({ title, description, image }) => {
+export const BasicCard = ({ title, description, image }) => {
     return (
-        <Card sx={{ maxWidth: '450px', margin: '1rem 0', minHeight: '200px', padding: '0.5rem 1rem 0'}}>
+        <Card sx={{ maxWidth: '400px', margin: '1rem 0', minHeight: '200px', padding: '0.5rem 1rem 0'}}>
           <CardContent>
             <Typography variant="h5" component="div">
               {title}
@@ -25,5 +26,14 @@ const BasicCard = ({ title, description, image }) => {
     );
 };
 
-
-export default BasicCard;
+export const SocialIconsCard = ({ icon, link }) => {
+  return (
+    <Link href={link} target='_blank'>
+      <Card sx={{ boxShadow: 'none', background: 'inherit', fontSize: '1.4rem'}}>
+        <CardContent>
+            {icon}
+        </CardContent>
+      </Card>
+    </Link>
+  );
+};

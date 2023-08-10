@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Link from '@mui/material/Link';
 
 const pages = ['About us', 'Contact us', 'FAQs'];
 const settings = ['Account', 'Dashboard', 'Logout'];
@@ -114,16 +115,16 @@ const Nav = () => {
           >
             Taskflow
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'start' } }}>
             {pages.map((page) => (
-              <Button 
-                variant='large'
+              <Link 
+                href='#'
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight: '400'}}
+                sx={{ my: 2, color: 'white', display: 'block', fontWeight: '500', mr: '1.2rem'}}
               >
                 {page}
-              </Button>
+              </Link>
             ))}
           </Box>
 
