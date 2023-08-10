@@ -16,7 +16,7 @@ const HomePage = () => {
                 flexWrap: 'wrap',
                 flexDirection: isMobile ? 'column-reverse' : '',
                 justifyContent: isWideScreen ? 'center' : 'space-between',
-                gap: isWideScreen ? '5rem' : '0.2rem',
+                gap: isWideScreen ? '20rem' : '0.2rem',
                 alignItems: 'center',
             }}>
                 {/* HOMEPAGE TITLE AND SUBTITLE */}

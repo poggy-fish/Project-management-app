@@ -94,7 +94,7 @@ const Nav = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" style={{ margin: 0}}>
         <Toolbar disableGutters>
           <Typography
             noWrap
