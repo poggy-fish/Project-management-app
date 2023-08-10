@@ -1,61 +1,3 @@
-// import * as React from 'react';
-// import { useState } from 'react';
-// import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import { Link, useMediaQuery } from '@mui/material';
-
-// const Nav = () => {
-//   const isMobile = useMediaQuery('(max-width: 500px)');
-//   const [isMobileNav, setMobileNav] = useState(false);
-
-//   const toggleMobileNav = () => {
-//     setMobileNav(!isMobileNav);
-//   };
-
-//   return (
-//     <Box sx={{ flexGrow: 1 }}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <IconButton
-//             size="large"
-//             edge="start"
-//             color="inherit"
-//             aria-label="menu"
-//             sx={{ mr: isMobile ? '6.5rem' : '2rem', display: isMobile ? 'block' : 'none', width: '2rem'}}
-//           >
-//             <MenuIcon onClick={toggleMobileNav} />
-//             <ul style={{ listStyle: 'none', textAlign: 'left', display: isMobileNav ? 'block' : 'none', padding: 0, }}>
-//               <li><Button color="inherit" size='medium'>Login</Button></li>
-//               <li><Button color="inherit" size='medium'>Register</Button></li>
-//             </ul>
-//           </IconButton>
-//           <Typography component="div"
-//             sx={{ 
-//                   flexGrow: 1, 
-//                   fontWeight: 'bold', 
-//                   textTransform: 'uppercase', 
-//                   display: isMobileNav ? 'none' : 'flex', 
-//                   pl: isMobile ? '' : '1rem',
-//                   letterSpacing: 1.2,
-//                 }}
-//           >
-//             Taskflow
-//           </Typography>
-//           <Button color="inherit" size='medium' sx={{ display: isMobile ? 'none' : 'block'}}>Login</Button>
-//           <Button color="inherit" size='medium' sx={{ display: isMobile ? 'none' : 'block'}}>Register</Button>
-//         </Toolbar>
-//       </AppBar>
-//     </Box>
-//   );
-// }
-
-// export default Nav;
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -69,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const pages = ['About us', 'Contact us', 'FAQs'];
 const settings = ['Account', 'Dashboard', 'Logout'];
@@ -76,6 +19,8 @@ const settings = ['Account', 'Dashboard', 'Logout'];
 const Nav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  // MEDIA QUERY
+  const isWideScreen = useMediaQuery('(min-with: 2000px)');
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -94,7 +39,7 @@ const Nav = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl" style={{ margin: 0}}>
+      <Container maxWidth="xl" sx={{ margin: 0}}>
         <Toolbar disableGutters>
           <Typography
             noWrap
@@ -106,6 +51,7 @@ const Nav = () => {
               fontFamily: 'inherit',
               fontWeight: 700,
               letterSpacing: '.1rem',
+              fontSize: '1.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -170,10 +116,11 @@ const Nav = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
+              <Button 
+                variant='large'
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', fontWeight: '400'}}
               >
                 {page}
               </Button>
