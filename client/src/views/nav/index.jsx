@@ -106,7 +106,7 @@ const Nav = () => {
               flexGrow: 1,
               fontFamily: 'inherit',
               fontWeight: 700,
-              letterSpacing: '.1rem',
+              fintSize: '1rem',
               color: 'inherit',
               textDecoration: 'none',
               textTransform: 'uppercase',
