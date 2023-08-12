@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { socialIcons } from "../../objects";
 import { SocialIconsCard } from "../../components/Card";
 

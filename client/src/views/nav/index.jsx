@@ -8,10 +8,8 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Link from '@mui/material/Link';
 
 const pages = ['About us', 'Contact us', 'FAQs'];
@@ -20,8 +18,6 @@ const settings = ['Account', 'Dashboard', 'Logout'];
 const Nav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  // MEDIA QUERY
-  const isWideScreen = useMediaQuery('(min-with: 2000px)');
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
