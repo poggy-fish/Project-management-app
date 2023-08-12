@@ -47,8 +47,8 @@ export const authSlice = createSlice({
         const updateTasks = state.tasks.map( (task) => {
             if(task._id === action.payload.task._id) return action.payload.task;
             return task;
-            state.tasks = updateTasks;
         })
+        state.tasks = updateTasks;
     }
     },
 })
