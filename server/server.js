@@ -3,39 +3,29 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const database = require('./database/database');
 const path = require('path');
-// const { fileURLToPath } = require("url");
-// const authRouter = require('./routers/auth');
-// const tasksRoutes = require('./routers/tasks');
-// const usersRoutes = require('./routers/users');
-// const { register } = require('./controllers/auth');
-// const { login } = require('./controllers/auth');
-// const { createPost } = require('./controllers/posts')
-// const verifyToken = require('./middleware/auth');
-// const User = require('./models/User');
-// const Task = require('./models/Task');
-// const multer = require('multer');
+const registerRoute = require('./routes/register'); // Import the registration route
+const loginRoute = require('./routes/login'); // Import the login route
 
 const app = express();
 const PORT = process.env.PORT || 3100;
 
-//Middlewares
+// Middlewares
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false })); //Built in middlewares to handle urlencoder data
-database(); //connect to the Database
+app.use(bodyParser.urlencoded({ extended: false })); // Corrected body-parser setup
+database(); // Connect to the Database
 
-// app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
+// Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-/* ROUTES */
-// app.use("/auth", authRouter);
-// app.use("/users", usersRoutes);
-// app.use("/posts", postRoutes);
+// Register and Login Routes
+app.use('/register', registerRoute);
+app.use('/login', loginRoute);
 
-//GET ALL ROUTES FOR REACT APP
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'))
+// Route for serving the React app
+app.get(/^\/(index\.html)?$|^\/static\/|^\/js\/|^\/css\/|^\/images\//, (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', req.url));
 });
 
-//Start Server
-app.listen(PORT, () => console.log(`Server is runninng on port: ${PORT}`));
+// Start Server
+app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));

@@ -34,7 +34,7 @@ const getUserTask = async (req, res) => {
 //GET USER TEAM & TEAMATES
 const getUserTeammates = async (req, res) => {
     try {
-        const { id } = req.param;
+        const { id } = req.params; // Corrected "param" to "params"
         const user = await User.findById(id);
 
         const teammates = await Promise.all(
@@ -45,13 +45,14 @@ const getUserTeammates = async (req, res) => {
             user.team.map((id) => User.findById(id))
         );
 
-        const formattedTeammates = teammates.map(({_id, firstName, lastName, title, email, picturePath, numberOfTasks, tasks}) => {
-            return {_id, firstName, lastName, title, email, picturePath, numberOfTasks, tasks};
+        const formattedTeammates = teammates.map(({ _id, firstName, lastName, title, email, picturePath, numberOftasks, tasks }) => {
+            return { _id, firstName, lastName, title, email, picturePath, numberOftasks, tasks }; // Corrected "numberOfTasks" to "numberOftasks"
         });
+
         res.status(200).json(formattedTeammates);
     } catch (error) {
-        res.status(404).json({ msg: error.msg });
-    };
+        res.status(404).json({ msg: error.message });
+    }
 };
 
-module.exports = { getUser, getUserTask, getUserTask };
+module.exports = { getUser, getUserTask, getUserTeammates };

@@ -14,7 +14,6 @@ const userSchema = mongoose.Schema({
     },
     userName: {
         type: String,
-        required: true,
         unique: true,
     },
     email: {
@@ -25,7 +24,6 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        min: 10,
     },
     picturePath:{
         type: String,
@@ -33,18 +31,15 @@ const userSchema = mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ['male', 'female', 'other'],
     },
     age: {
         type: Number,
-        min: 18,
-        required: true,
     },
     CreatedAt: {
         type: Date,
         default: Date.now,
     },
-    NumberOftasks: {
+    numberOftasks: {
         type: Number,
         default: 0,
     },

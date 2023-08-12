@@ -4,7 +4,7 @@
 // CREATE POST
 const createPost = async (req, res) => {
     try {
-        const { userId, firstName, lastName, title, text, increasePriority, comments } = req.body;
+        const { userId, title, text, increasePriority, comments } = req.body;
         const user = await User.findById(userId);
 
         const newPost = new Post({
@@ -13,16 +13,18 @@ const createPost = async (req, res) => {
             lastName: user.lastName,
             title,
             text,
-            increasePriority: {},
-            comments: [],
+            increasePriority,
+            comments,
         });
+
         await newPost.save();
-        const post = await Post.find();
-        res.status(201).json(post);
+        const posts = await Post.find();
+        res.status(201).json(posts);
     } catch (error) {
-        res.status(409).json({ msg: error.msg });
-    };
+        res.status(409).json({ msg: error.message });
+    }
 };
+
 
 //GET ALL POSTS
 const getPost = async (req, res) => {
@@ -45,19 +47,23 @@ const updatePost = async (req, res) => {
         if (isPriority) {
             post.increasePriority.delete(userId);
         } else {
-            post.increasePriority.set(userId, true)
+            post.increasePriority.set(userId, true);
         }
 
-        const updatePost = await Post.findByIdAndUpdate(
-            id, 
-            { increasePriority: post.increasePriority },
-            { comments: post.comments },
+        const updatedPost = await Post.findByIdAndUpdate(
+            id,
+            {
+                increasePriority: post.increasePriority,
+                comments: post.comments,
+            },
             { new: true }
-        )
-        res.status(200).json(updatePost);
+        );
+
+        res.status(200).json(updatedPost);
     } catch (error) {
-        res.status(404).json({ msg: error.msg });
+        res.status(404).json({ msg: error.message });
     }
-}
+};
+
 
 module.exports = { createPost, getPost, updatePost };
