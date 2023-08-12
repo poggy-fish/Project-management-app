@@ -26,7 +26,7 @@ import { createTheme } from "@mui/material/styles";
 
 function App() {
   const mode = useSelector((state) => state.mode);
-  const isAuth = Boolean(useSelector((state) => state.token));
+  const isAuth = Boolean(useSelector((state) => state.user)); //using state.user insteadof state.token for now to authorize login
 
   return (
     <div className="app">

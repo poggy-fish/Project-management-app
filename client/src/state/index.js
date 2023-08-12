@@ -12,11 +12,11 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         setMode: (state) => {
-            state.mode = state.mode === 'light' ? 'dark' : 'light'
+            state.mode = state.mode === 'light' ? 'dark' : 'light';
         },
         setLogin: (state, action) => {
-            state.user = state.payload.user;
-            state.token = state.payload.token;
+            state.user = action.payload.user; // Corrected line
+            state.token = action.payload.token; // Corrected line
         },
         setLogout: (state, action) => {
             state.user = null;
@@ -26,32 +26,43 @@ export const authSlice = createSlice({
             if (state.user) {
                 state.user.teammates = action.payload.teammates;
             } else {
-                console.error('User has no teammates')
+                console.error('User has no teammates');
             }
         },
         setUserTasks: (state, action) => {
             if (state.user) {
-                state.user.tasks = action.payload.tasks
+                state.user.tasks = action.payload.tasks;
             } else {
-                console.error('User has no tasks.')
+                console.error('User has no tasks.');
             }
         },
-    setUserTeam: (state, action) => {
-        if (state.user) {
-            state.user.team = action.payload.team
-        } else {
-            console.error('User has no team.')
-        }
+        setUserTeam: (state, action) => {
+            if (state.user) {
+                state.user.team = action.payload.team;
+            } else {
+                console.error('User has no team.');
+            }
+        },
+        setTasks: (state, action) => {
+            const updatedTasks = state.tasks.map(task => {
+                if (task._id === action.payload.task._id) {
+                    return action.payload.task;
+                }
+                return task;
+            });
+            state.tasks = updatedTasks;
+        },
     },
-    setTasks: (state, action) => {
-        const updateTasks = state.tasks.map( (task) => {
-            if(task._id === action.payload.task._id) return action.payload.task;
-            return task;
-        })
-        state.tasks = updateTasks;
-    }
-    },
-})
+});
 
-export const {setMode, setLogin, setLogout, setUserTeammates, setUserTasks, setUserTeam, setTasks } = authSlice.actions;
+export const {
+    setMode,
+    setLogin,
+    setLogout,
+    setUserTeammates,
+    setUserTasks,
+    setUserTeam,
+    setTasks,
+} = authSlice.actions;
+
 export default authSlice.reducer;
