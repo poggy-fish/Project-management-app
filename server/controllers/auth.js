@@ -52,9 +52,10 @@ const login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ msg: 'Password does not match'});
 
-        const token = jwt.sign({ id: user._id}, process.env.JWT_SECRET);
+        // const token = jwt.sign({ id: user._id}, process.env.JWT_SECRET); // not requiring the token for now
         delete user.password;
-        res.status(200).json({token, user});  
+        // res.status(200).json({token, user});   // not requiring the token
+        res.status(200).json({ user});  
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
