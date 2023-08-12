@@ -108,14 +108,73 @@ const RegisterForm = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <TextField required id="outlined-required" name="firstName" label="First name"  onChange={handleChange} value={ isSubmit ? '' : null } />
-                    <TextField required id="outlined-required" name="lastName" label="Last name" onChange={handleChange} value={ isSubmit ? '' : null } />
-                    <TextField id="outlined" label="Title" onChange={handleChange} value={ isSubmit ? '' : null } />
-                    <TextField required id="outlined-required" name="userName" label="Username" onChange={handleChange} value={ isSubmit ? '' : null } />
-                    <TextField required id="outlined-required" name="email" label="Email" type="email" onChange={handleChange} value={ isSubmit ? '' : null } />
-                    <TextField required id="outlined-password-input" name="password" label="Password" type="password" autoComplete="current-password" onChange={handleChange} value={ isSubmit ? '' : null } />
-                    <TextField required id="outlined-password-input" name="confirmPassword" label="Confirm Password" type="password" autoComplete="current-password" onChange={handleChange} value={ isSubmit ? '' : null } />
-                    <Button variant="contained" name="submit" type="submit" size="large" sx={{ minWidth: '17rem', p: '.9rem 0', mt: '0.4rem', ml: 1,}}>Register</Button>
+                    <TextField 
+                        required id="outlined-required" 
+                        name="firstName" 
+                        label="First name"  
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } />
+                    <TextField 
+                        required id="outlined-required" 
+                        name="lastName" 
+                        label="Last name" 
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } 
+                    />
+
+                    <TextField 
+                        id="outlined" 
+                        label="Title" 
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } 
+                    />
+
+                    <TextField 
+                        required id="outlined-required" 
+                        name="userName" 
+                        label="Username" 
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } 
+                    />
+
+                    <TextField 
+                        required id="outlined-required" 
+                        name="email" 
+                        label="Email" 
+                        type="email" 
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } 
+                    />
+
+                    <TextField 
+                        required id="outlined-password-input" 
+                        name="password" 
+                        label="Password" 
+                        type="password" 
+                        autoComplete="current-password" 
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } 
+                    />
+
+                    <TextField 
+                        required id="outlined-password-input" 
+                        name="confirmPassword" 
+                        label="Confirm Password" 
+                        type="password" 
+                        autoComplete="current-password" 
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } 
+                    />
+
+                    <Button 
+                        variant="contained" 
+                        name="submit" 
+                        type="submit" 
+                        size="large" 
+                        sx={{ minWidth: '17rem', p: '.9rem 0', mt: '0.4rem', ml: 1,}}
+                    >
+                        Register
+                    </Button>
                 </Box>
             </Modal>
         </div>

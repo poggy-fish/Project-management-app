@@ -15,14 +15,31 @@ const Footer = () => {
             }}
         >
             <Box>
-                <Typography sx={{ fontWeight: 'bold', textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1.5,}}>Taskflow</Typography>
+                <Typography 
+                    sx={{ 
+                        fontWeight: 'bold', 
+                        textAlign: 'center', 
+                        textTransform: 'uppercase', 
+                        letterSpacing: 1.5,
+                    }}
+                >
+                    Taskflow
+                </Typography>
                 <Box
-                    sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', mt: '0.5rem'}}
+                    sx={{ 
+                        display: 'flex', 
+                        flexWrap: 'wrap', 
+                        justifyContent: 'center', 
+                        mt: '0.5rem'
+                    }}
                 >
                     {Object.keys(socialIcons).map((iconKey => {
                     const icon = socialIcons[iconKey];
                     return (
-                        <SocialIconsCard icon={icon.icon} link={icon.link} />
+                        <SocialIconsCard 
+                            icon={icon.icon} 
+                            link={icon.link} 
+                        />
                     );
                  }))}
                 </Box>

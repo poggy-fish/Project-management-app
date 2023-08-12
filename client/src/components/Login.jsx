@@ -18,10 +18,9 @@ const style = {
     boxShadow: 24,
     p: 4,
     '& .MuiTextField-root': { m: 1, ml: 1, width: '30ch' },
-                //   display: !showSignIn ? 'none' : 'flex',
-                  flexDirection: 'column',
-                  mb: '2rem',
-                  mt: '1rem',
+    flexDirection: 'column',
+    mb: '2rem',
+    mt: '1rem',
 };
 
 const LoginForm = () => {
@@ -90,7 +89,7 @@ const LoginForm = () => {
         <div>
             <Button 
                 variant='outlined' 
-                size={ isSmallestScreen ? "small" : "large"} 
+                size={ isSmallestScreen ? "small" : "large" } 
                 sx={{ 
                     mt: '1rem', 
                     mb: '0.5rem', 
@@ -120,9 +119,26 @@ const LoginForm = () => {
                     alignItems: 'center',
                 }}
             >
-                <TextField required id="outlined-required email" name="email" label="Email" type="email"  onChange={handleChange}/>
-                <TextField id="outlined-password-input password" name="password" label="Password" type="password" autoComplete="current-password" onChange={handleChange}/>
-                <Button variant="contained" type="submit" size="large" sx={{ minWidth: '17rem', p: '.9rem 0', mt: '0.4rem', ml: 1,}}>Sign in</Button>
+                <TextField 
+                    required id="outlined-required email" 
+                    name="email" 
+                    label="Email"  
+                    type="email"  
+                    onChange={handleChange}/>
+                <TextField 
+                    id="outlined-password-input password" 
+                    name="password" label="Password" 
+                    type="password" autoComplete="current-password" 
+                    onChange={handleChange}
+                />
+                <Button 
+                    variant="contained" 
+                    type="submit" 
+                    size="large" 
+                    sx={{ minWidth: '17rem', p: '.9rem 0', mt: '0.4rem', ml: 1,}}
+                >
+                    Sign in
+                </Button>
             </Box>
         </Modal>
         </div>
