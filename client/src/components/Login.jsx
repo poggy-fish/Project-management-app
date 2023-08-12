@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import Modal from '@mui/material/Modal';
 import { useState } from "react";
 import TextField from '@mui/material/TextField';
@@ -12,7 +12,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 450,
+    minHeight: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -119,6 +120,15 @@ const LoginForm = () => {
                     alignItems: 'center',
                 }}
             >
+                <Typography variant='p'
+                    sx={{ 
+                        mb: '1rem', 
+                        fontWeight: 700, 
+                        fontSize: '1.1rem'
+                    }}
+                >
+                    Sign in to your account
+                </Typography>
                 <TextField 
                     required id="outlined-required email" 
                     name="email" 
