@@ -1,6 +1,6 @@
 import { Box, Link, Typography } from "@mui/material";
-import { socialIcons } from "../objects";
-import { SocialIconsCard } from "../components/Card";
+import { socialIcons } from "../../objects";
+import { SocialIconsCard } from "../../components/Card";
 
 const Footer = () => {
 

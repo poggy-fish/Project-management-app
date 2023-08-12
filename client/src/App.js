@@ -17,7 +17,7 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import HomePage from "./views/homePage/index";
 import Nav from './views/nav/index';
-import Footer from './footer/index';
+import Footer from './views/footer/index';
 import Dashboard from "./views/dashboardPage/index";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
