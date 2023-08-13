@@ -35,7 +35,7 @@ function App() {
         {/* <ThemeProvider theme={theme}> */}
           <CssBaseline />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path={"/"} element={<HomePage />} />
             <Route
               path="/dashboard"
               element={isAuth ? <Dashboard /> : <Navigate to="/" />}
