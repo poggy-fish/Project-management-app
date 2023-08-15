@@ -52,6 +52,15 @@ export const authSlice = createSlice({
             });
             state.tasks = updatedTasks;
         },
+        setPosts: (state, action) => {
+            const updatePosts = state.posts.map(post => {
+                if (post._id === action.payload.post._id) {
+                    return action.payload.post;
+                }
+                return post;
+            });
+            state.post = updatePosts;
+        },
     },
 });
 
@@ -63,6 +72,7 @@ export const {
     setUserTasks,
     setUserTeam,
     setTasks,
+    setPosts,
 } = authSlice.actions;
 
 export default authSlice.reducer;

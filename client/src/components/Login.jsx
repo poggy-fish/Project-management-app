@@ -35,13 +35,8 @@ const LoginForm = () => {
 
     // GET FORM DATA
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        title: '',
-        userName: '',
         email: '',
         password: '',
-        confirmPassword: ''
     });
 
     const handleChange = (event) => {

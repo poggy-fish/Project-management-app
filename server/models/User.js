@@ -11,6 +11,12 @@ const userSchema = mongoose.Schema({
     },
     title: {
         type: String,
+        default: 'Task Manager',
+        requred: true,
+    },
+    location: {
+        type: String,
+        required: true,
     },
     userName: {
         type: String,

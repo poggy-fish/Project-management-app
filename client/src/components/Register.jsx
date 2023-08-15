@@ -34,6 +34,7 @@ const RegisterForm = () => {
         firstName: '',
         lastName: '',
         title: '',
+        location: '',
         userName: '',
         email: '',
         password: '',
@@ -133,8 +134,17 @@ const RegisterForm = () => {
                     />
 
                     <TextField 
-                        id="outlined" 
+                        required id="outlined-required" 
                         label="Title" 
+                        name="title"
+                        onChange={handleChange} 
+                        value={ isSubmit ? '' : null } 
+                    />
+
+                    <TextField 
+                        required id="outlined-required" 
+                        label="Location" 
+                        name="location"
                         onChange={handleChange} 
                         value={ isSubmit ? '' : null } 
                     />

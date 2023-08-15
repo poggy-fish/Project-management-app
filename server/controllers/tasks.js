@@ -52,7 +52,7 @@ const assignTask = async (req, res) => {
         const isAssigned = task.assignedTo.includes(userId);
 
         if (!isAssigned) {
-            task.assignedTo.push(user);
+            task.assignedTo.push(userId); // Push userId, not the user object
         }
 
         const updatedTask = await Task.findByIdAndUpdate(
@@ -65,5 +65,6 @@ const assignTask = async (req, res) => {
         res.status(404).json({ msg: error.message });
     }
 };
+
 
 module.exports = { createTask, getTasks, getUserTasks, assignTask };
