@@ -16,22 +16,24 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import SendIcon from "@mui/icons-material/Send";
-import HomeIcon from "@mui/icons-material/Home";
-import BadgeIcon from "@mui/icons-material/Badge";
+import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../state/index";
 import { useState, useEffect } from "react";
-import WorkIcon from "@mui/icons-material/Work";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import AddCommentIcon from "@mui/icons-material/AddComment";
 import illustration from "../../media/illustration.png";
 import { Tasks } from "../../components/DashboardComponents";
 import { TeammatesCards } from "../../components/Card";
-import { TextField, useMediaQuery } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
-import FlexBetween from "../../components/FlexBetween";
+import { useMediaQuery } from "@mui/material";
+import PostsFeeds from "../../components/PostsFeeds";
 
 const drawerWidth = 240;
 
@@ -104,12 +106,12 @@ const Dashboard = () => {
     const [tasks, setTasks] = useState();
     const [tasksErr, setTasksErr] = useState();
     const currentUser = useSelector((state) => state.user);
-    const isMobile = useMediaQuery('(max-width: 600px)')
+    const isMobile = useMediaQuery("(max-width: 600px)");
 
     const getTasks = async () => {
         try {
             const response = await fetch("http://localhost:3100/posts", {
-                method: 'GET',
+                method: "GET",
                 headers: { "Content-Type": "application/json" },
             });
             const data = await response.json();
@@ -119,8 +121,6 @@ const Dashboard = () => {
             setTasksErr(error);
         }
     };
-
-   console.log('tasks')
 
     useEffect(() => {
         getTasks();
@@ -212,22 +212,22 @@ const Dashboard = () => {
                                         }}
                                     >
                                         {index === 0 ? (
-                                            <HomeIcon
+                                            <HomeOutlinedIcon
                                                 sx={{ color: "#0f1925" }}
                                             />
                                         ) : index === 1 ? (
-                                            <DashboardIcon
+                                            <GridViewOutlinedIcon
                                                 sx={{ color: "#0f1925" }}
                                             />
                                         ) : index === 2 ? (
-                                            <AssignmentIcon
+                                            <AssignmentOutlinedIcon
                                                 sx={{
                                                     color: "#0f1925",
                                                     fontSize: "1.5rem",
                                                 }}
                                             />
                                         ) : index === 3 ? (
-                                            <SendIcon
+                                            <SendOutlinedIcon
                                                 sx={{ color: "#0f1925" }}
                                             />
                                         ) : (
@@ -282,18 +282,20 @@ const Dashboard = () => {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: "0 0.25rem" }}>
                 <DrawerHeader />
-                <Box sx={{ color: "#fff", display: 'flex', gap: '0.3rem'}}>
+                <Box sx={{ color: "#fff", display: "flex", gap: "0.3rem" }}>
                     {/* LEFT SIDE OF DASHBOARD */}
                     <Box
                         sx={{
                             padding: "0.25rem",
                             display: "flex",
+                            position: "fixed",
                             flexDirection: "column",
                             gap: "0.50rem",
                         }}
                     >
                         <Box
                             width="19.5rem"
+                            height="22rem"
                             sx={{
                                 // background: "#00000061",
                                 background: "#ffffff03",
@@ -302,39 +304,42 @@ const Dashboard = () => {
                                 display: "flex",
                                 flexDirection: "column",
                                 gap: "0.75rem",
-                                margin: '0rem',
+                                margin: "0rem",
                                 boxShadow: 1,
                             }}
                         >
-                            <Typography fontWeight="bold" fontSize="1.2rem" p="0.25rem 0" >
+                            <Typography
+                                fontWeight="bold"
+                                fontSize="1.2rem"
+                                p="0.25rem 0"
+                            >
                                 Welcome {userFullName}
                             </Typography>
                             <img
                                 src={illustration}
                                 width="100"
-                                style={{ borderRadius: "50%" }}
+                                style={{ borderRadius: "5px" }}
                             />
                             <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                                <BadgeIcon />
-                                <Typography fontWeight="500">
-                                    {currentUser.firstName}{" "}
-                                    {currentUser.lastName}
+                                <PersonOutlineOutlinedIcon />
+                                <Typography fontWeight="300">
+                                    {userFullName}
                                 </Typography>
                             </Box>
                             <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                                <WorkIcon />
+                                <WorkOutlineIcon />
                                 <Typography fontWeight="500">
                                     {currentUser.title}
                                 </Typography>
                             </Box>
                             <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                                <WorkIcon />
+                                <LocationOnOutlinedIcon />
                                 <Typography fontWeight="500">
                                     {currentUser.location}
                                 </Typography>
                             </Box>
                             <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                                <AssignmentIcon />
+                                <AssignmentOutlinedIcon />
                                 <Typography fontWeight="500">
                                     {" "}
                                     Tasks: {Tasks.length}
@@ -345,92 +350,222 @@ const Dashboard = () => {
                         {/* USER TEAMMATES */}
                         <Box
                             width="19.5rem"
-                            minHeight={ !isMobile ? "100vh" : "28rem" }
+                            height={"35.1rem"}
                             sx={{
                                 // background: "#00000061",
                                 background: "#ffffff03",
                                 padding: "1rem 0.5rem",
-                                overflowY: 'scroll',
-                                margin: '0rem',
+                                overflowY: "scroll",
+                                margin: "0rem",
                                 boxShadow: 1,
                             }}
                         >
-                            <Typography fontWeight="bold" fontSize="1.2rem" p="0.25rem 0" mb="0.5rem" >My Teammates</Typography>
-                            <Box width="18rem" sx={{display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }}>
-                              <TeammatesCards 
-                                link="none" 
-                                name={userFullName}
-                                image={illustration}
-                                title={currentUser.title} 
-                              />
+                            <Typography
+                                fontWeight="bold"
+                                fontSize="1.2rem"
+                                p="0.25rem 0"
+                                mb="0.5rem"
+                            >
+                                My Teammates
+                            </Typography>
+                            <Box
+                                width="18rem"
+                                sx={{
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    gap: "0.25rem",
+                                }}
+                            >
+                                <TeammatesCards
+                                    link="none"
+                                    name={userFullName}
+                                    image={illustration}
+                                    title={currentUser.title}
+                                />
                             </Box>
                         </Box>
-                         
                     </Box>
-                    {/* USER TASKS AND FEED*/}
+                    {/* POSTS FEED*/}
+
                     <Box
-                            width="100%"
-                            minHeight= { !isMobile ? "100vh" : "auto"}
+                        dth="auto"
+                        minHeight={!isMobile ? "100vh" : "auto"}
+                        sx={{
+                            // background: "#00000061",
+                            background: "#ffffff03",
+                            padding: "0.5rem 1rem",
+                            overflowY: "scroll",
+                            mt: "0.3rem",
+                            ml: "20rem",
+                            boxShadow: 1,
+                        }}
+                    >
+                        <Typography
+                            fontWeight="bold"
+                            fontSize="1.2rem"
+                            p="0.25rem 0"
+                            mb="0.5rem"
+                        >
+                            Posts Feed
+                        </Typography>
+                        <Box
                             sx={{
-                                // background: "#00000061",
-                                background: "#ffffff03",
-                                padding: "0.5rem 1rem",
-                                overflowY: 'scroll',
-                                mt: '0.3rem',
-                                boxShadow: 1,
+                                mb: "1.5rem",
+                                background: "#212e3f",
+                                p: "1rem",
+                                borderRadius: "5px",
                             }}
-                        >   
-                            <Typography fontWeight="bold" fontSize="1.2rem" p="0.25rem 0" mb="0.5rem" >Posts Feed</Typography>
-                                <Box sx={{ mb: "1.5rem", background: "#212e3f", p: '1rem', borderRadius: "5px" }}>
-                                    <Typography fontWeight="bold" mb="0.5rem">Add a post</Typography>
-                                    <Box sx={{ display: "flex", gap: '0.5rem' }}>
-                                        <img src={illustration} alt="user" width="70px" style={{ borderRadius: "5px" }} />
-                                        <input type="text" 
-                                            style={{
-                                                background: "#6a798952",
-                                                flexGrow: 1,
-                                                border: 'none',
-                                                fontSize: "1rem",
-                                                padding: "0.8rem 0.2rem",
-                                                color: "#fff",
-                                                borderRadius: '5px',
-                                            }}
-                                        />
-                                    </Box>
-                                </Box>
-                            {
-                             tasks ?
-                             tasks.map((poster) => (
-                                 <Box 
-                                     sx={{
-                                         background: "#212e3f",
-                                         p: '1rem',
-                                         m: '1rem 0',
-                                         borderRadius: '5px',
-                                     }}
-                                 >  
-                                     <Box 
-                                        mb="1rem"
-                                        sx={{
-                                            display: "flex",
-                                            gap: '1.2rem',
-                                            alignItems: 'end',
-                                        }}
-                                     >
-                                        <img src={illustration} alt="user" width="70px" style={{ borderRadius: "5px" }} />
-                                        <Box>
-                                            <Typography fontWeight="bolder" >{`${poster.firstName} ${poster.lastName}`} </Typography>
-                                             <Typography fontWeight="bolder" > { poster.title } </Typography>
-                                        </Box>
-                                     </Box>
-                                     <Box>
-                                         <Typography>
-                                             {poster.text}
-                                         </Typography>
-                                     </Box>
-                                 </Box>
-                             )) : " "
-                            }
+                        >
+                            <Typography fontWeight="bold" mb="0.5rem">
+                                Add a post
+                            </Typography>
+                            <Box sx={{ display: "flex", gap: "0.5rem" }}>
+                                <img
+                                    src={illustration}
+                                    alt="user"
+                                    width="60px"
+                                    style={{ borderRadius: "0.3rem" }}
+                                />
+                                <input
+                                    type="text"
+                                    style={{
+                                        background: "#6a798952",
+                                        flexGrow: 1,
+                                        border: "none",
+                                        fontSize: "1rem",
+                                        padding: "0.5rem 0.2rem",
+                                        color: "#fff",
+                                        borderRadius: "1.5rem",
+                                    }}
+                                />
+                            </Box>
+                        </Box>
+
+                        {tasks
+                            ? tasks.map((poster) => (
+                                  <PostsFeeds
+                                      name={`${poster.firstName} ${poster.lastName}`}
+                                      title={poster.title}
+                                      commentsLength={poster.comments.length}
+                                      text={poster.text}
+                                  />
+                              ))
+                            : ""}
+                    </Box>
+                    {/* TASKS FEED */}
+                    <Box
+                        width="auto"
+                        minHeight={!isMobile ? "100vh" : "auto"}
+                        sx={{
+                            // background: "#00000061",
+                            background: "#ffffff03",
+                            padding: "0.5rem 1rem",
+                            overflowY: "scroll",
+                            mt: "0.3rem",
+                            boxShadow: 1,
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <Typography
+                                fontWeight="bold"
+                                fontSize="1.2rem"
+                                p="0.25rem 0"
+                                mb="0.5rem"
+                            >
+                                Tasks Overview
+                            </Typography>
+                            <Typography
+                                variant="a"
+                                fontSize="1rem"
+                                p="0.25rem 0"
+                                mb="0.5rem"
+                                sx={{
+                                    "&:hover": {
+                                        textDecoration: "underline",
+                                        cursor: "pointer",
+                                    },
+                                }}
+                            >
+                                View all
+                            </Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                mb: "1.5rem",
+                                background: "#212e3f",
+                                p: "1rem",
+                                borderRadius: "5px",
+                            }}
+                        >
+                            <Typography fontWeight="bold" mb="0.5rem">
+                                Add a post
+                            </Typography>
+                            <Box sx={{ display: "flex", gap: "0.5rem" }}>
+                                <img
+                                    src={illustration}
+                                    alt="user"
+                                    width="70px"
+                                    style={{ borderRadius: "5px" }}
+                                />
+                                <input
+                                    type="text"
+                                    style={{
+                                        background: "#6a798952",
+                                        flexGrow: 1,
+                                        border: "none",
+                                        fontSize: "1rem",
+                                        padding: "0.8rem 0.2rem",
+                                        color: "#fff",
+                                        borderRadius: "5px",
+                                    }}
+                                />
+                            </Box>
+                        </Box>
+                        {tasks
+                            ? tasks.map((poster) => (
+                                  <Box
+                                      sx={{
+                                          background: "#212e3f",
+                                          p: "1rem",
+                                          m: "1rem 0",
+                                          borderRadius: "5px",
+                                      }}
+                                  >
+                                      <Box
+                                          mb="1rem"
+                                          sx={{
+                                              display: "flex",
+                                              gap: "1.2rem",
+                                              alignItems: "end",
+                                          }}
+                                      >
+                                          <img
+                                              src={illustration}
+                                              alt="user"
+                                              width="70px"
+                                              style={{ borderRadius: "5px" }}
+                                          />
+                                          <Box>
+                                              <Typography fontWeight="bolder">
+                                                  {`${poster.firstName} ${poster.lastName}`}{" "}
+                                              </Typography>
+                                              <Typography fontWeight="bolder">
+                                                  {" "}
+                                                  {poster.title}{" "}
+                                              </Typography>
+                                          </Box>
+                                      </Box>
+                                      <Box>
+                                          <Typography>{poster.text}</Typography>
+                                      </Box>
+                                  </Box>
+                              ))
+                            : " "}
                     </Box>
                 </Box>
             </Box>
