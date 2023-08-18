@@ -4,7 +4,8 @@ import { styled } from '@mui/material';
 
 const FlexBetween = styled(Box)({
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'start',
+    gap: '3rem',
     alignItems: 'center',
     flexBasis: 'auto',
 });

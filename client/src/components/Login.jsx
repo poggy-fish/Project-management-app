@@ -73,8 +73,6 @@ const LoginForm = () => {
                     );
                     navigate("/dashboard");
                 }
-            } else {
-                console.error('Could not sign in');
             }
         } catch (error) {
             console.error('Could not sign in', error);
@@ -119,7 +117,7 @@ const LoginForm = () => {
                     sx={{ 
                         mb: '1rem', 
                         fontWeight: 700, 
-                        fontSize: '1.1rem'
+                        fontSize: '1.1rem',
                     }}
                 >
                     Sign in to your account

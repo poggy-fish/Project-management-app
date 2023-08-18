@@ -1,17 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import { socialIcons } from "../../objects";
 import { SocialIconsCard } from "../../components/Card";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+    const isAuth = Boolean(useSelector((state) => state.user)); //using state.user insteadof state.token for now to authorize login
 
     return (
         <Box 
             sx={{
+                display: isAuth ? 'none' : '',
                 background: '#1976d2', 
                 color: '#fff', 
                 minHeight: '50px',
                 padding: '1rem 0 0 2.5rem',
-                marginTop: '2rem',
+                marginTop: isAuth ? '0' : '2rem',
             }}
         >
             <Box>

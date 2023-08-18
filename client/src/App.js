@@ -30,24 +30,20 @@ function App() {
 
   return (
     <div className="app">
-      <Nav />
+      { !isAuth ? <Nav/> : "" }
       <BrowserRouter>
         {/* <ThemeProvider theme={theme}> */}
           <CssBaseline />
           <Routes>
-            <Route path={"/"} element={ isAuth ? <Dashboard /> : <HomePage /> } />
+            <Route path={"/"} element= {isAuth ? <Dashboard /> : <HomePage />} />
             <Route
               path="/dashboard"
               element={isAuth ? <Dashboard /> : <Navigate to="/" />}
             />
-            {/* <Route
-              path="/profile/:userId"
-              element={isAuth ? <Dashboard /> : <Navigate to="/" />}
-            /> */}
           </Routes>
         {/* </ThemeProvider> */}
       </BrowserRouter>
-      <Footer/>
+      { !isAuth ? <Footer/> : " " }
     </div>
   );
 }

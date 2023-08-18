@@ -9,7 +9,6 @@ import { useMediaQuery } from '@mui/material';
 export const BasicCard = ({ title, description, image }) => {
   const isMobile = useMediaQuery('(max-width: 550px)');
   const isWideScreen = useMediaQuery('(min-width: 1790px)');
-
     return (
         <Card 
           sx={{ 
@@ -61,3 +60,35 @@ export const SocialIconsCard = ({ icon, link }) => {
     </Link>
   );
 };
+
+export const TeammatesCards = ({ name, link, image, title }) => {
+  const isMobile = useMediaQuery('(max-width: 550px)');
+  const isWideScreen = useMediaQuery('(min-width: 1790px)');
+  return (
+    <Link href={link} sx={{ textDecoration: "none" }} >
+        <Card 
+          sx={{ 
+            width: "8.87rem", 
+            margin: '0',
+            height: '10rem', 
+            padding: '0.0rem',
+          }}
+        >
+          <CardContent>
+          <CardMedia
+                component="img"
+                width="80px"
+                image={image}
+                alt="user"
+            />
+            <Typography fontWeight="500" fontSize="0.95rem">
+              {name}
+            </Typography>
+            <Typography fontSize="0.8rem">
+              {title}
+            </Typography>
+          </CardContent>
+        </Card>
+    </Link>
+);
+}

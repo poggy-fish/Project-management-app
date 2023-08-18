@@ -7,13 +7,14 @@ const user = require('./routes/users');
 const registerRoute = require('./routes/register'); // Import the registration route
 const loginRoute = require('./routes/login'); // Import the login route
 const tasksRoute = require('./routes/tasks')
+const postsRoute = require('./routes/posts');
 
 const app = express();
 const PORT = process.env.PORT || 3100;
 
 // Middlewares
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false })); // Corrected body-parser setup
+app.use(bodyParser.json()); 
 database(); // Connect to the Database
 
 // Serve static files from the React app
@@ -24,6 +25,7 @@ app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/user', user);
 app.use('/tasks', tasksRoute);
+app.use('/posts', postsRoute);
 
 // Route for serving the React app
 app.get(/^\/(index\.html)?$|^\/static\/|^\/js\/|^\/css\/|^\/images\//, (req, res) => {

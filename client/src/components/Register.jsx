@@ -66,8 +66,8 @@ const RegisterForm = () => {
                 const savedUser = await response.json();
                 setIsSubmit(true);
             } else {
-                // Handle error (if needed)
-                console.error('Registration failed');
+                // Handle error 
+                console.error('There was no response');
             }
         } catch (error) {
             console.error(`Registration failed, error: ${error}`);

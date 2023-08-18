@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -9,6 +9,7 @@ import UserWidget from "./userWidget";
 import shadows from "@mui/material/styles/shadows";
 
 export const UserInfo = () => {
+    const isWideScreen = useMediaQuery('(min-width: 1800px)')
     const [user, setUser] = useState(null);
     const { userId } = useParams();
     const currentUser = useSelector((state) => state.user);
@@ -53,6 +54,7 @@ export const UserInfo = () => {
 };
 
 export const Tasks = () => {
+    const isWideScreen = useMediaQuery('(min-width: 1800px)')
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
     const tasks = useSelector((state) => state.tasks);
@@ -100,7 +102,7 @@ export const Tasks = () => {
                 background: '#fff',
                 padding: '1rem',
                 width: '23rem',
-                minHeight: '43rem',
+                minHeight: isWideScreen ? '42rem' : '28rem',
                 boxShadow: 2,
                 borderRadius: '0.75rem'
             }}

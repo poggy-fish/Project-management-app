@@ -4,17 +4,16 @@
 // CREATE POST
 const createPost = async (req, res) => {
     try {
-        const { userId, title, text, increasePriority, comments } = req.body;
+        const { userId, firstName, lastName, title, text } = req.body;
         const user = await User.findById(userId);
-
+        
         const newPost = new Post({
             userId,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            user,
+            firstName,
+            lastName,
             title,
             text,
-            increasePriority,
-            comments,
         });
 
         await newPost.save();
