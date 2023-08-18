@@ -307,7 +307,7 @@ const Dashboard = () => {
                             }}
                         >
                             <Typography fontWeight="bold" fontSize="1.2rem" p="0.25rem 0" >
-                                User intro
+                                Welcome {userFullName}
                             </Typography>
                             <img
                                 src={illustration}
