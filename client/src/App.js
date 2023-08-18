@@ -1,19 +1,3 @@
-// import Nav from "./views/nav/index";
-// import HomePage from "./views/homePage";
-// import Footer from "./footer/index";
-// function App() {
-//   return (
-//     <div style={{ background: '#f5f9ff', minHeight: '100vh'}}>
-//       <Nav />
-//       <HomePage />
-//       <Footer />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import HomePage from "./views/homePage/index";
 import Nav from './views/nav/index';

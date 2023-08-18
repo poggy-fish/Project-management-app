@@ -4,8 +4,8 @@ const verifyToken = require('../middleware/auth');
 
 const router = express.Router();
 
-router.get("/:userId/tasks", getTasks);
-router.get("/:userId/usertasks", getUserTasks);
+router.get("/", getTasks);
+router.get("/:userId/", getUserTasks);
 
 /* UPDATE */
 router.patch("/:id/Assigned", assignTask);

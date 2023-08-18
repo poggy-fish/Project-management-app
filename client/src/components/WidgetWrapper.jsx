@@ -3,8 +3,8 @@ import { styled } from "@mui/system";
 
 const WidgetWrapper = styled(Box)(({ theme }) => ({
   padding: "1.5rem 1.5rem 0.75rem 1.5rem",
-  maxWidth: '23rem',
-  background: '#fff',
+  maxWidth: "23rem",
+  background: "#fff",
   borderRadius: "0.75rem",
 }));
 
