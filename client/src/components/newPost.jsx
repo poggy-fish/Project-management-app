@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
-import illustration from '../media/illustration.png';
 
 const style = {
   position: 'absolute',
@@ -56,7 +55,6 @@ const NewPost = () => {
       });
   
       if (response.ok) {
-        // Assuming the API response contains the saved post data
         const savedPost = await response.json();
         // Clear the input fields after successful post creation
         setInputValues({
@@ -78,23 +76,24 @@ const NewPost = () => {
   return (
     <div>
         <Box sx={{ display: "flex", gap: "0.5rem" }}>
-        <img
+        {/* USER PROFILE PICTURE  */}
+        {/* <img
           src={illustration}
           alt="user"
           width="60px"
           style={{ borderRadius: "0.3rem" }}
-        />
+        /> */}
         <input
             type="text"
             onClick={handleOpen}
             style={{
-              width: "90%",
+              width: "100%",
               background: "#6a798952",
               border: "none",
               fontSize: "1rem",
-              padding: "0.8rem 0.2rem",
+              padding: "1rem 0.2rem",
               color: "#fff",
-              borderRadius: "1.5rem",
+              borderRadius: "0.5rem",
             }}
         />
         </Box>

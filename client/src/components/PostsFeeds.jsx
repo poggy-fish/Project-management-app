@@ -3,10 +3,11 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import illustration from "../media/illustration.png";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const PostsFeeds = ({ name, title, commentsLength, text, allComments }) => {
+const PostsFeeds = ({ name, profilePic, title, commentsLength, text, allComments }) => {
   const [tasks, setTasks] = useState();
   const [tasksErr, setTasksErr] = useState();
   const currentUser = useSelector((state) => state.user);
@@ -48,12 +49,22 @@ const PostsFeeds = ({ name, title, commentsLength, text, allComments }) => {
             alignItems: "end",
           }}
         >
-          <img
-            src={illustration}
+          {/* POSTER PROFILE PIC */}
+          {/* USING AN ICON FOR THE PROFILE PICTURE UNTIL I CAN GET THE API TO WOEK */}
+          <AccountBoxIcon 
+            sx={{ 
+              fontSize: 70, 
+              color: "#6a798952",
+              mb: '-0.35rem',
+              mr: "-0.7rem"
+            }}
+          /> 
+          {/* <img
+            src={profilePic}
             alt="user"
             width="60px"
             style={{ borderRadius: "0.3rem" }}
-          />
+          /> */}
           <Box>
             <Typography fontWeight="bolder"> {name} </Typography>
             <Typography fontWeight="bolder"> {title} </Typography>

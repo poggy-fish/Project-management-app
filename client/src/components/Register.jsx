@@ -3,6 +3,8 @@ import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
+import Dropzone from "react-dropzone";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 const style = {
   position: "absolute",
@@ -39,6 +41,7 @@ const RegisterForm = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    picturePath: "",
   });
 
   const handleChange = (event) => {
@@ -54,17 +57,29 @@ const RegisterForm = () => {
     event.preventDefault(); // Prevent default form submission
 
     try {
-      const response = await fetch("http://localhost:3100/register", {
+      const response = await fetch("http://localhost:3100/auth/register", {
         method: "POST",
         body: JSON.stringify(formData), // Convert formData to JSON
         headers: {
           "Content-Type": "application/json",
         },
       });
+      const savedUser = await response.json();
 
-      if (response.ok) {
-        const savedUser = await response.json();
+      if (savedUser) {
+        setFormData({
+          firstName: "",
+          lastName: "",
+          title: "",
+          location: "",
+          userName: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          picturePath: "",
+        })
         setIsSubmit(true);
+        handleClose();
       } else {
         // Handle error
         console.error("There was no response");
@@ -195,6 +210,42 @@ const RegisterForm = () => {
             onChange={handleChange}
             value={isSubmit ? "" : null}
           />
+
+          <Dropzone
+            name="picturePath"
+            acceptedFiles=".jpg,.png,.jpeg"
+            multiple={false}
+            onDrop={(acceptedFiles) =>
+              setFormData((prevData) => ({
+                ...prevData,
+                picturePath: URL.createObjectURL(acceptedFiles[0]),
+              }))
+            }
+          >
+            {({ getRootProps, getInputProps }) => (
+              <Box
+                {...getRootProps()}
+                border={`2px dashed`}
+                minWidth="70%"
+                p="1rem"
+                sx={{ "&:hover": { cursor: "pointer" } }}
+              >
+                <input {...getInputProps()} />
+                {!formData.picturePath ? (
+                  <p>Add Picture Here</p>
+                ) : (
+                  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <img
+                      src={formData.picturePath}
+                      alt="Uploaded"
+                      style={{ maxHeight: "100px" }} // You can adjust the height
+                    />
+                    <EditOutlinedIcon />
+                  </Box>
+                )}
+              </Box>
+            )}
+          </Dropzone>
 
           <Button
             variant="contained"

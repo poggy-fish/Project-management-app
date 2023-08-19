@@ -2,9 +2,17 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Tasks } from "./DashboardComponents";
+import FlexBetween from "./FlexBetween";
 
 export const BasicCard = ({ title, description, image }) => {
   const isMobile = useMediaQuery("(max-width: 550px)");
@@ -59,27 +67,79 @@ export const SocialIconsCard = ({ icon, link }) => {
   );
 };
 
-export const TeammatesCards = ({ name, link, image, title }) => {
-  const isMobile = useMediaQuery("(max-width: 550px)");
-  const isWideScreen = useMediaQuery("(min-width: 1790px)");
-  return (
-    <Link href={link} sx={{ textDecoration: "none" }}>
-      <Card
+export const TeammatesCards = ({ profilePic, fullName, userTitle  }) => {
+  const [tasks, setTasks] = useState();
+  const [tasksErr, setTasksErr] = useState();
+  const currentUser = useSelector((state) => state.user);
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const userFullName = `${currentUser.firstName} ${currentUser.lastName}`;
+
+  const getTasks = async () => {
+      try {
+        const response = await fetch("http://localhost:3100/posts", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setTasks(data);
+      } catch (error) {
+        console.error(` There are no tasks: ${error}`);
+        setTasksErr(error);
+      }
+    };
+  
+    useEffect(() => {
+      getTasks();
+    }, []);
+
+
+return (
+  <Box
         sx={{
-          width: "8.87rem",
-          margin: "0",
-          height: "10rem",
-          padding: "0.0rem",
+          // background: "#00000061",
+          background: "#212e3f",
+          borderRadius: "5px",
+          padding: " 0.5rem 1rem",
+          boxShadow: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "0.75rem",
+          margin: "0rem",
         }}
       >
-        <CardContent>
-          <CardMedia component="img" width="80px" image={image} alt="user" />
-          <Typography fontWeight="500" fontSize="0.95rem">
-            {name}
+        {/* USER PROFILE */}
+        {
+          profilePic = currentUser.picturePath ? ( 
+            <img
+              src={currentUser.picturePath}
+              width="60"
+              style={{ borderRadius: "5px" }}
+            />
+          ) : (
+            <FlexBetween> 
+              <AccountBoxIcon 
+                sx={{ 
+                  fontSize: 100, 
+                  color: "#6a798952",
+                  mt: "-0.3rem",
+                  mb: "-0.5rem",
+                }}
+              /> 
+              {/* <EditIcon/> */}
+            </FlexBetween>
+          )
+        }
+        {/* <UserImage image={ currentUser.picturePath } /> */}
+        <Box sx={{ display: "flex-column", alignItems: "end", gap: "0.3rem" }}>
+          <Typography fontWeight="900" fontSize="0.85rem">
+            { fullName = userFullName }
           </Typography>
-          <Typography fontSize="0.8rem">{title}</Typography>
-        </CardContent>
-      </Card>
-    </Link>
-  );
+          <Typography fontWeight="500" fontSize="0.8rem">
+            { userTitle = currentUser.title }
+          </Typography>
+        </Box>
+      </Box>
+  )
 };

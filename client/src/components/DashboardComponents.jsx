@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setTasks } from "../state";
 import { setPosts } from "../state";
-import UserWidget from "./userWidget";
 import shadows from "@mui/material/styles/shadows";
 
 export const UserInfo = () => {
@@ -47,7 +46,6 @@ export const UserInfo = () => {
       >
         Welcome to your dasboard
       </Typography>
-      <UserWidget />
     </>
   );
 };

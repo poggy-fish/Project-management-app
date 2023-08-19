@@ -27,14 +27,18 @@ import { setLogout } from "../../state/index";
 import { useState, useEffect } from "react";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import AddCommentIcon from "@mui/icons-material/AddComment";
+import EditIcon from '@mui/icons-material/Edit';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import illustration from "../../media/illustration.png";
 import { Tasks } from "../../components/DashboardComponents";
 import { TeammatesCards } from "../../components/Card";
 import { useMediaQuery } from "@mui/material";
 import PostsFeeds from "../../components/PostsFeeds";
 import NewPost from "../../components/newPost";
+import UserImage from "../../components/UserImage";
+import FlexCenter from "../../components/FlexCenter";
+import FlexBetween from "../../components/FlexBetween";
+import UserComponent from "../../components/user";
 
 const drawerWidth = 240;
 
@@ -270,47 +274,8 @@ const Dashboard = () => {
               gap: "0.50rem",
             }}
           >
-            <Box
-              width="19.5rem"
-              height="22rem"
-              sx={{
-                // background: "#00000061",
-                background: "#ffffff03",
-                padding: "1rem 0.5rem",
-                boxShadow: 1,
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.75rem",
-                margin: "0rem",
-                boxShadow: 1,
-              }}
-            >
-              <Typography fontWeight="bold" fontSize="1.2rem" p="0.25rem 0">
-                Welcome {userFullName}
-              </Typography>
-              <img
-                src={illustration}
-                width="100"
-                style={{ borderRadius: "5px" }}
-              />
-              <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                <PersonOutlineOutlinedIcon />
-                <Typography fontWeight="300">{userFullName}</Typography>
-              </Box>
-              <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                <WorkOutlineIcon />
-                <Typography fontWeight="500">{currentUser.title}</Typography>
-              </Box>
-              <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                <LocationOnOutlinedIcon />
-                <Typography fontWeight="500">{currentUser.location}</Typography>
-              </Box>
-              <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                <AssignmentOutlinedIcon />
-                <Typography fontWeight="500"> Tasks: {Tasks.length}</Typography>
-              </Box>
-            </Box>
-
+            {/* USER PROFILE */}
+            <UserComponent />
             {/* USER TEAMMATES */}
             <Box
               width="19.5rem"
@@ -346,11 +311,11 @@ const Dashboard = () => {
                   image={illustration}
                   title={currentUser.title}
                 />
+
               </Box>
             </Box>
           </Box>
           {/* POSTS FEED*/}
-
           <Box
             dth="auto"
             minHeight={!isMobile ? "100vh" : "auto"}
@@ -395,6 +360,7 @@ const Dashboard = () => {
                     commentsLength={poster.comments.length}
                     text={poster.text}
                     allComments={`Add comments`}
+                    // profilePic={poster.picturePath}
                   />
                 ))
               : ""}

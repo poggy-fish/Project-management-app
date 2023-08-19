@@ -3,7 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const database = require('./database/database');
 const path = require('path');
+const multer = require('multer');
 const user = require('./routes/users');
+const { register } = require('./controllers/auth')
 const registerRoute = require('./routes/register'); // Import the registration route
 const loginRoute = require('./routes/login'); // Import the login route
 const tasksRoute = require('./routes/tasks')
@@ -19,6 +21,21 @@ database(); // Connect to the Database
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
+
+/* FILE STORAGE */
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/assets');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+});
+const upload = multer({ storage });
+
+//Routes with files
+app.post('/auth/register', upload.single('picture'), register);
+app.post('/posts', upload.single('picture'), postsRoute);
 
 // Register and Login Routes
 app.use('/register', registerRoute);

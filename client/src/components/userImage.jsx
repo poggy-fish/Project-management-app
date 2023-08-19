@@ -7,8 +7,8 @@ const UserImage = ({ image, size = "50px" }) => {
         style={{ objectFit: "cover", borderRadius: "50%" }}
         width={size}
         height={size}
-        alt="user"
-        src={`http://localhost:3100/assets/${image}`}
+        alt={image}
+        src={`http://localhost:3100/public/assets/${image}`}
       />
     </Box>
   );

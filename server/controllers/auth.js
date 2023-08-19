@@ -13,6 +13,7 @@ const register = async (req, res) => {
             userName,
             email,
             password,
+            picturePath,
         } = req.body;
         
         const salt = await bcrypt.genSalt(10); 
@@ -30,6 +31,7 @@ const register = async (req, res) => {
                 userName,
                 email,
                 password: hashedPassword,
+                picturePath,
             });
 
             const savedUser = await newUser.save();
