@@ -6,7 +6,7 @@ import illustration from "../media/illustration.png";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const PostsFeeds = ({ name, title, commentsLength, text }) => {
+const PostsFeeds = ({ name, title, commentsLength, text, allComments }) => {
   const [tasks, setTasks] = useState();
   const [tasksErr, setTasksErr] = useState();
   const currentUser = useSelector((state) => state.user);
@@ -60,7 +60,7 @@ const PostsFeeds = ({ name, title, commentsLength, text }) => {
           </Box>
         </Box>
         <Box>
-          <Typography>{text}</Typography>
+          <Typography sx={{ lineHeight: 2, }}>{text}</Typography>
         </Box>
         <Box
           sx={{
@@ -103,6 +103,11 @@ const PostsFeeds = ({ name, title, commentsLength, text }) => {
                 : `${commentsLength} comments`}
             </Typography>
             <AddCommentIcon />
+          </Box>
+          <Box sx={{ p:'0.5rem', display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <Typography>
+                {allComments}
+              </Typography>
           </Box>
         </Box>
       </Box>

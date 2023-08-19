@@ -34,6 +34,7 @@ import { Tasks } from "../../components/DashboardComponents";
 import { TeammatesCards } from "../../components/Card";
 import { useMediaQuery } from "@mui/material";
 import PostsFeeds from "../../components/PostsFeeds";
+import NewPost from "../../components/newPost";
 
 const drawerWidth = 240;
 
@@ -382,26 +383,8 @@ const Dashboard = () => {
               <Typography fontWeight="bold" mb="0.5rem">
                 Add a post
               </Typography>
-              <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                <img
-                  src={illustration}
-                  alt="user"
-                  width="60px"
-                  style={{ borderRadius: "0.3rem" }}
-                />
-                <input
-                  type="text"
-                  style={{
-                    background: "#6a798952",
-                    flexGrow: 1,
-                    border: "none",
-                    fontSize: "1rem",
-                    padding: "0.5rem 0.2rem",
-                    color: "#fff",
-                    borderRadius: "1.5rem",
-                  }}
-                />
-              </Box>
+                {/* NEW POST COMPONENT */}
+                <NewPost />
             </Box>
 
             {tasks
@@ -411,6 +394,7 @@ const Dashboard = () => {
                     title={poster.title}
                     commentsLength={poster.comments.length}
                     text={poster.text}
+                    allComments={`Add comments`}
                   />
                 ))
               : ""}
