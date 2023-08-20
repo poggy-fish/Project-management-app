@@ -4,16 +4,13 @@ const User = require('../models/User');
 //Create Team
 const createTeam = async (req, res) => {
     try {
-        const { userId, title, description, activeTasks } = req.body;
+        const { userId, title, description, owner } = req.body;
         const user = await User.findById(userId);
 
         const newTeam = new Team({
             title,
             description,
-            owner: `${user.firstName} ${user.lastName}`,
-            members: [],
-            activeTasks: activeTasks || 0, // Set the default value or use the passed value
-            tasks: [],
+            owner,
         });
 
         await newTeam.save();
@@ -24,7 +21,6 @@ const createTeam = async (req, res) => {
         res.status(409).json({ msg: error.message });
     }
 };
-
 
 //GET TEAMS
 const getTeams = async (req, res) => {
@@ -38,4 +34,4 @@ const getTeams = async (req, res) => {
     }
 };
 
-module.exports = { createTeam, getTeams }
+module.exports = { getTeams, createTeam };

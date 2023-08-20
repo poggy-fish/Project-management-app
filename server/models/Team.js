@@ -21,7 +21,7 @@ const teamSchema = mongoose.Schema({
         default: [],
     },
     activeTasks: {
-        type: Number,
+        type: String,
         default: 0,
     },
 });

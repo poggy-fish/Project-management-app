@@ -1,13 +1,15 @@
 const express = require('express');
-const { getTasks, getUserTasks, assignTask } = require('../controllers/tasks');
+const { createTask, getTasks, getUserTasks, assignTask } = require('../controllers/tasks');
 const verifyToken = require('../middleware/auth');
 
 const router = express.Router();
 
+router.post('/:id', createTask);
 router.get("/", getTasks);
-router.get("/:userId/", getUserTasks);
+router.get("/:id", getTasks);
+router.get("usertasks/:id", getUserTasks);
 
 /* UPDATE */
-router.patch("/:id/Assigned", assignTask);
+router.patch("/:id", assignTask);
 
 module.exports = router;

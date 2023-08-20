@@ -4,6 +4,8 @@ const { getUserTeammates } = require('../controllers/user');
 const { getUser } = require('../controllers/user');
 const router = express.Router();
 
-router.get("/:id", getUser )
+router.get('/', getUser); //Get All Users
+router.get("/:id", getUser);//Get specific user
+
 
 module.exports = router;

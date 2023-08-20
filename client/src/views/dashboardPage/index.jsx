@@ -21,24 +21,16 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../state/index";
 import { useState, useEffect } from "react";
-import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import EditIcon from '@mui/icons-material/Edit';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import illustration from "../../media/illustration.png";
-import { Tasks } from "../../components/DashboardComponents";
 import { TeammatesCards } from "../../components/Card";
 import { useMediaQuery } from "@mui/material";
 import PostsFeeds from "../../components/PostsFeeds";
 import NewPost from "../../components/newPost";
-import UserImage from "../../components/UserImage";
-import FlexCenter from "../../components/FlexCenter";
-import FlexBetween from "../../components/FlexBetween";
 import UserComponent from "../../components/user";
+import TaskComponent from "../../components/Task";
 
 const drawerWidth = 240;
 
@@ -108,27 +100,31 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const Dashboard = () => {
-  const [tasks, setTasks] = useState();
-  const [tasksErr, setTasksErr] = useState();
+  const [posts, setPosts] = useState();
+  const [postErr, setPostErr] = useState();
   const currentUser = useSelector((state) => state.user);
-  const isMobile = useMediaQuery("(max-width: 600px)");
 
-  const getTasks = async () => {
+  //MEDIA QUERIES
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isDesktop = useMediaQuery("(max-width: 1222px)");
+  const isWideScreen = useMediaQuery("(min-width: 2000px)");
+
+  const getPosts = async () => {
     try {
       const response = await fetch("http://localhost:3100/posts", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
-      setTasks(data);
+      setPosts(data);
     } catch (error) {
       console.error(` There are no tasks: ${error}`);
-      setTasksErr(error);
+      setPostErr(error);
     }
   };
 
   useEffect(() => {
-    getTasks();
+    getPosts();
   }, []);
 
   const theme = useTheme();
@@ -150,7 +146,7 @@ const Dashboard = () => {
   const userFullName = `${currentUser.firstName} ${currentUser.lastName}`;
 
   return (
-    <Box sx={{ display: "flex", minHeight: "90vh", background: "#0f1925" }}>
+    <Box sx={{ display: "flex", minHeight: "90vh", background: "#0f1925", }}>
       <CssBaseline />
       <AppBar position="fixed" open={open} sx={{ background: "#0f1925" }}>
         <Toolbar>
@@ -261,16 +257,16 @@ const Dashboard = () => {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: "0 0.25rem" }}>
+      <Box component="main" sx={{ flexGrow: 1, p: isMobile ? "0" : "0 0.25rem" }}>
         <DrawerHeader />
-        <Box sx={{ color: "#fff", display: "flex", gap: "0.3rem" }}>
+        <Box sx={{ color: "#fff", display: isMobile ? "block" : "flex", gap: "0.3rem", background: "#0f1925" }}>
           {/* LEFT SIDE OF DASHBOARD */}
           <Box
             sx={{
               padding: "0.25rem",
-              display: "flex",
-              position: "fixed",
-              flexDirection: "column",
+              display: isMobile ? "block" : "flex",
+              position: isMobile ? "" : "fixed",
+              flexDirection: isMobile ? "row" : "column",
               gap: "0.50rem",
             }}
           >
@@ -278,8 +274,8 @@ const Dashboard = () => {
             <UserComponent />
             {/* USER TEAMMATES */}
             <Box
-              width="19.5rem"
-              height={"35.1rem"}
+              width={isMobile ? "100%" : "19.5rem"}
+              height={ isMobile ? "auto" : "35.1rem"}
               sx={{
                 // background: "#00000061",
                 background: "#ffffff03",
@@ -287,6 +283,7 @@ const Dashboard = () => {
                 overflowY: "scroll",
                 margin: "0rem",
                 boxShadow: 1,
+                display: isMobile ? "none" : "",
               }}
             >
               <Typography
@@ -316,72 +313,23 @@ const Dashboard = () => {
             </Box>
           </Box>
           {/* POSTS FEED*/}
-          <Box
-            dth="auto"
-            minHeight={!isMobile ? "100vh" : "auto"}
-            sx={{
-              // background: "#00000061",
-              background: "#ffffff03",
-              padding: "0.5rem 1rem",
-              overflowY: "scroll",
-              mt: "0.3rem",
-              ml: "20rem",
-              boxShadow: 1,
-            }}
-          >
-            <Typography
-              fontWeight="bold"
-              fontSize="1.2rem"
-              p="0.25rem 0"
-              mb="0.5rem"
-            >
-              Posts Feed
-            </Typography>
-            <Box
+          <Box sx={{
+            display: isMobile ? "flex" : "flex",
+            flexDirection: isMobile ? "column-reverse" : "",
+            gap: "0.2rem"
+          }}>
+              <Box
+              width="auto"
+              minHeight={!isMobile ? "100vh" : "auto"}
               sx={{
-                mb: "1.5rem",
-                background: "#212e3f",
-                p: "1rem",
-                borderRadius: "5px",
-              }}
-            >
-              <Typography fontWeight="bold" mb="0.5rem">
-                Add a post
-              </Typography>
-                {/* NEW POST COMPONENT */}
-                <NewPost />
-            </Box>
-
-            {tasks
-              ? tasks.map((poster) => (
-                  <PostsFeeds
-                    name={`${poster.firstName} ${poster.lastName}`}
-                    title={poster.title}
-                    commentsLength={poster.comments.length}
-                    text={poster.text}
-                    allComments={`Add comments`}
-                    // profilePic={poster.picturePath}
-                  />
-                ))
-              : ""}
-          </Box>
-          {/* TASKS FEED */}
-          <Box
-            width="auto"
-            minHeight={!isMobile ? "100vh" : "auto"}
-            sx={{
-              // background: "#00000061",
-              background: "#ffffff03",
-              padding: "0.5rem 1rem",
-              overflowY: "scroll",
-              mt: "0.3rem",
-              boxShadow: 1,
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
+                // background: "#00000061",
+                background: "#ffffff03",
+                padding: "0.5rem 1rem",
+                overflowY: "scroll",
+                mt: "0.3rem",
+                ml: isMobile ? "0" : "20rem",
+                boxShadow: 1,
+                display: isMobile ? "block" : "",
               }}
             >
               <Typography
@@ -390,95 +338,80 @@ const Dashboard = () => {
                 p="0.25rem 0"
                 mb="0.5rem"
               >
-                Tasks Overview
+                Posts Feed
               </Typography>
-              <Typography
-                variant="a"
-                fontSize="1rem"
-                p="0.25rem 0"
-                mb="0.5rem"
+              <Box
                 sx={{
-                  "&:hover": {
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  },
+                  mb: "1.5rem",
+                  background: "#212e3f",
+                  p: "1rem",
+                  borderRadius: "5px",
                 }}
               >
-                View all
-              </Typography>
+                <Typography fontWeight="bold" mb="0.5rem">
+                  Add a post
+                </Typography>
+                  {/* NEW POST COMPONENT */}
+                  <NewPost />
+              </Box>
+
+              {posts
+                ? posts.map((poster) => (
+                    <PostsFeeds
+                      name={`${poster.firstName} ${poster.lastName}`}
+                      title={poster.title}
+                      commentsLength={poster.comments.length}
+                      text={poster.text}
+                      allComments={`Add comments`}
+                      // profilePic={poster.picturePath}
+                    />
+                  ))
+                : ""}
             </Box>
+             {/* TASKS FEED */}
             <Box
+              width={ isMobile ? "100%" : "70%"}
+              minHeight={!isMobile ? "100vh" : "auto"}
               sx={{
-                mb: "1.5rem",
-                background: "#212e3f",
-                p: "1rem",
-                borderRadius: "5px",
+                // background: "#00000061",
+                background: "#ffffff03",
+                padding: "0.5rem 1rem",
+                overflowY: "scroll",
+                mt: "0.3rem",
+                boxShadow: 1,
               }}
             >
-              <Typography fontWeight="bold" mb="0.5rem">
-                Add a post
-              </Typography>
-              <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                <img
-                  src={illustration}
-                  alt="user"
-                  width="70px"
-                  style={{ borderRadius: "5px" }}
-                />
-                <input
-                  type="text"
-                  style={{
-                    background: "#6a798952",
-                    flexGrow: 1,
-                    border: "none",
-                    fontSize: "1rem",
-                    padding: "0.8rem 0.2rem",
-                    color: "#fff",
-                    borderRadius: "5px",
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography
+                  fontWeight="bold"
+                  fontSize="1.2rem"
+                  p="0.25rem 0"
+                  mb="0.5rem"
+                >
+                  Tasks Overview
+                </Typography>
+                <Typography
+                  variant="a"
+                  fontSize="1rem"
+                  p="0.25rem 0"
+                  mb="0.5rem"
+                  sx={{
+                    "&:hover": {
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    },
                   }}
-                />
+                >
+                  View all
+                </Typography>
               </Box>
+              <TaskComponent />
             </Box>
-            {tasks
-              ? tasks.map((poster) => (
-                  <Box
-                    sx={{
-                      background: "#212e3f",
-                      p: "1rem",
-                      m: "1rem 0",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    <Box
-                      mb="1rem"
-                      sx={{
-                        display: "flex",
-                        gap: "1.2rem",
-                        alignItems: "end",
-                      }}
-                    >
-                      <img
-                        src={illustration}
-                        alt="user"
-                        width="70px"
-                        style={{ borderRadius: "5px" }}
-                      />
-                      <Box>
-                        <Typography fontWeight="bolder">
-                          {`${poster.firstName} ${poster.lastName}`}{" "}
-                        </Typography>
-                        <Typography fontWeight="bolder">
-                          {" "}
-                          {poster.title}{" "}
-                        </Typography>
-                      </Box>
-                    </Box>
-                    <Box>
-                      <Typography>{poster.text}</Typography>
-                    </Box>
-                  </Box>
-                ))
-              : " "}
           </Box>
         </Box>
       </Box>

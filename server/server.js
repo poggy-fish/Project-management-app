@@ -8,8 +8,9 @@ const user = require('./routes/users');
 const { register } = require('./controllers/auth')
 const registerRoute = require('./routes/register'); // Import the registration route
 const loginRoute = require('./routes/login'); // Import the login route
-const tasksRoute = require('./routes/tasks')
+const tasksRoute = require('./routes/tasks');
 const postsRoute = require('./routes/posts');
+const teamsRoute = require('./routes/team');
 
 const app = express();
 const PORT = process.env.PORT || 3100;
@@ -43,6 +44,7 @@ app.use('/login', loginRoute);
 app.use('/user', user);
 app.use('/tasks', tasksRoute);
 app.use('/posts', postsRoute);
+app.use('/teams', teamsRoute);
 
 // Route for serving the React app
 app.get(/^\/(index\.html)?$|^\/static\/|^\/js\/|^\/css\/|^\/images\//, (req, res) => {

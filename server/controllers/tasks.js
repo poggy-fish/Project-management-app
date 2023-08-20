@@ -1,19 +1,23 @@
 const Task = require('../models/Task');
 const User = require('../models/User');
-const uniqueId = require('uniqid');
 
 const createTask = async (req, res) => {
     try {
-        const { userId, description, title } = req.body;
+        const { 
+            userId,
+            firstName,
+            lastName,
+            title,
+            description, 
+        } = req.body;
         const user = await User.findById(userId);
 
         const newTask = new Task({
-            firstName: user.firstName,
-            lastName: user.lastName,
+            userId,
+            firstName,
+            lastName,
             title,
             description,
-            comments: [],
-            isCompleted: false,
         });
 
         await newTask.save();

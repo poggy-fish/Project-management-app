@@ -3,7 +3,6 @@ const taskSchema = mongoose.Schema({
     userId: {
         type: String,
         required: true,
-        unique: true,
     },
     firstName: {
         type: String,
