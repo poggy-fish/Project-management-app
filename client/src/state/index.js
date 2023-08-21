@@ -36,6 +36,13 @@ export const authSlice = createSlice({
         console.error("User has no tasks.");
       }
     },
+    setUserPosts: (state, action) => {
+      if (state.user) {
+        state.user.post = action.payload.post;
+      } else {
+        console.error("User has no post.");
+      }
+    },
     setUserTeam: (state, action) => {
       if (state.user) {
         state.user.team = action.payload.team;

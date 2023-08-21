@@ -52,17 +52,17 @@ const TeammatesCards = ({ profilePic, fullName, userTitle  }) => {
             profilePic = currentUser.picturePath ? ( 
               <img
                 src={currentUser.picturePath}
-                width="60"
+                width="50"
                 style={{ borderRadius: "5px" }}
               />
             ) : (
               <FlexBetween> 
                 <AccountBoxIcon 
                   sx={{ 
-                    fontSize: 100, 
+                    fontSize: 60, 
                     color: "#6a798952",
-                    mt: "-0.3rem",
-                    mb: "-0.5rem",
+                    mt: "0.3rem",
+                    mb: "0.5rem",
                   }}
                 /> 
                 {/* <EditIcon/> */}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Typography, useMediaQuery}  from "@mui/material"
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { setUserTasks } from '../state';
 import FlexBetween from './FlexBetween';
 import NewPost from './newPost';
 import PostsFeeds from './PostsFeeds';
@@ -9,17 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 const TaskComponent = ({ taskCreator, date, title, description, comments, isCompleted, priority }) => {
     const user = useSelector((state) => state.user);
-    const { userId } = useParams();
-    const [userTasks, setUserTasks] = useState(null);
+    const dispatch = useDispatch();
+    const userTasks = useSelector( (state) => state.user.tasks)
 
     const getUserTasks = async () => {
         try {
-            const response = await fetch(`http://localhost:3100/tasks/${userId}`, {
+            const response = await fetch(`http://localhost:3100/tasks/${user._id}`, {
                 method: "GET",
                 "content-type": "application/json"
             });
             const data = await response.json();
-            setUserTasks(data);
+            dispatch(setUserTasks({ tasks: data }));
         } catch (error) {
             console.error(`There was an error ${error}`);
         }

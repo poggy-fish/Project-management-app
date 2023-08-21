@@ -7,35 +7,14 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Tasks } from "./DashboardComponents";
-import FlexBetween from "./FlexBetween";
+import TaskComponent from "./Task";
 
 const UserComponent = ({ profilePic, fullName, userTitle, userLocation, userTasks }) => {
-    const [tasks, setTasks] = useState();
-    const [tasksErr, setTasksErr] = useState();
-    const currentUser = useSelector((state) => state.user);
-    const userFullName = `${currentUser.firstName} ${currentUser.lastName}`;
+    const user = useSelector((state) => state.user);
+    const assignedTasks = useSelector( (state) => state.user.tasks );
+    const userFullName = `${user.firstName} ${user.lastName}`;
 // MEDIA QUERRIES
     const isMobile = useMediaQuery("(max-width: 600px)");
-
-    const getTasks = async () => {
-        try {
-          const response = await fetch("http://localhost:3100/posts", {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          });
-          const data = await response.json();
-          setTasks(data);
-        } catch (error) {
-          console.error(` There are no tasks: ${error}`);
-          setTasksErr(error);
-        }
-      };
-    
-      useEffect(() => {
-        getTasks();
-      }, []);
-
 
 return (
     <Box
@@ -57,9 +36,9 @@ return (
         >
           {/* USER PROFILE */}
           {
-            profilePic = currentUser.picturePath ? ( 
+            profilePic = user.picturePath ? ( 
               <img
-                src={currentUser.picturePath}
+                src={user.picturePath}
                 width="100"
                 style={{ borderRadius: "5px" }}
               />
@@ -78,7 +57,7 @@ return (
               </Box>
             )
           }
-          {/* <UserImage image={ currentUser.picturePath } /> */}
+          {/* <UserImage image={ user.picturePath } /> */}
           <Box 
             sx={{
               display: "flex",
@@ -89,19 +68,19 @@ return (
           >
             <Box sx={{ display: "flex", gap: "0.5rem" }}>
               <PersonOutlineOutlinedIcon />
-              <Typography fontWeight="500">{ fullName = userFullName }</Typography>
+              <Typography fontWeight="300" variant="p">{ fullName = userFullName }</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "0.5rem" }}>
               <WorkOutlineIcon />
-              <Typography fontWeight="500">{ userTitle = currentUser.title }</Typography>
+              <Typography fontWeight="300" variant="p">{ userTitle = user.title }</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "0.5rem" }}>
               <LocationOnOutlinedIcon />
-              <Typography fontWeight="500">{ userLocation = currentUser.location}</Typography>
+              <Typography fontWeight="300" variant="p">{ userLocation = user.location}</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "0.5rem" }}>
               <AssignmentOutlinedIcon />
-              <Typography fontWeight="500"> Tasks: { userTasks = Tasks.length }</Typography>
+              <Typography fontWeight="300" variant="p"> Tasks: { userTasks = assignedTasks.length }</Typography>
             </Box>
             </Box>
         </Box>
