@@ -3,4 +3,3 @@ A full stack Team &amp; task management app that will allow users to either crea
 
 <img width="1000" alt="image" src="https://github.com/JAbsolu/Team-management-app/assets/90818638/bfee0bc8-3a8d-4cc1-9977-180eb5bfb2d1">
 <img width="1659" alt="image" src="https://github.com/JAbsolu/Team-management-app/assets/90818638/0f50f6c7-fd44-470a-92da-cb0db962428f">
-<img width="1659" alt="image" src="./readme-img/dashboard.png">
