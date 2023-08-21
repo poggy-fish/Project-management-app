@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
@@ -64,18 +64,18 @@ return (
                 style={{ borderRadius: "5px" }}
               />
             ) : (
-              <FlexBetween> 
+              <Box> 
                 <AccountBoxIcon 
                   sx={{ 
-                    fontSize: isMobile ? 150 : 365, 
+                    fontSize: isMobile ? 100 : 150, 
                     ml:isMobile ? "" : "-2.3rem", 
-                    mt:isMobile ? "" : "-2.5rem",
-                    mb:isMobile ? "" : "-1.7rem",
+                    mt:isMobile ? "" : "1rem",
+                    mb:isMobile ? "" : "-1rem",
                     color: "#6a798952" ,
                   }}
                 /> 
                 {/* <EditIcon/> */}
-              </FlexBetween>
+              </Box>
             )
           }
           {/* <UserImage image={ currentUser.picturePath } /> */}

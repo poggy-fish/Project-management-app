@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { socialIcons } from "../../objects";
-import { SocialIconsCard } from "../../components/Card";
+import SocialIconsCard from "../../components/cards/SocialIconsCard";
 import { useSelector } from "react-redux";
 
 const Footer = () => {

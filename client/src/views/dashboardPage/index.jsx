@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../state/index";
 import { useState, useEffect } from "react";
 import illustration from "../../media/illustration.png";
-import { TeammatesCards } from "../../components/Card";
+import TeammatesCards from "../../components/cards/TeammatesCards";
 import { useMediaQuery } from "@mui/material";
 import PostsFeeds from "../../components/PostsFeeds";
 import NewPost from "../../components/newPost";
@@ -257,7 +257,7 @@ const Dashboard = () => {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: isMobile ? "0" : "0 0.25rem" }}>
+      <Box component="main" sx={{ p: isMobile ? "0" : isWideScreen ? "0 15rem" : "0 0.25rem", gap: "1rem", }}>
         <DrawerHeader />
         <Box sx={{ color: "#fff", display: isMobile ? "block" : "flex", gap: "0.3rem", background: "#0f1925" }}>
           {/* LEFT SIDE OF DASHBOARD */}

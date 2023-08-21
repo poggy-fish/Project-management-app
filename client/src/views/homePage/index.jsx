@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { services } from "../../objects";
 import illustrationVideo from "../../media/illustration.mp4";
-import { BasicCard } from "../../components/Card";
+import HomepageCard from "../../components/cards/HomepageCards";
 import LoginForm from "../../components/Login";
 import RegisterForm from "../../components/Register";
 
@@ -102,7 +102,7 @@ const HomePage = () => {
         {Object.keys(services).map((serviceKey) => {
           const service = services[serviceKey];
           return (
-            <BasicCard
+            <HomepageCard
               title={service.title}
               description={service.description}
               image={service.img}
