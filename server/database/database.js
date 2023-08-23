@@ -4,8 +4,6 @@ const { posts } = require('../data/index');
 const User = require('../models/User');
 const Post = require('../models/Post');
 
-const password = encodeURIComponent("2154400191");
-
 //Set up database connection
 const connectDb = async () => {
     try {
