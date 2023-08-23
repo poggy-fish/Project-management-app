@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const database = require('./database/database');
 const path = require('path');
 const multer = require('multer');
+require("dotenv").config();
 const user = require('./routes/users');
 const { register } = require('./controllers/auth')
 const registerRoute = require('./routes/register'); // Import the registration route
@@ -14,6 +15,8 @@ const teamsRoute = require('./routes/team');
 
 const app = express();
 const PORT = process.env.PORT || 3100;
+
+console.log(process.env.NODE_ENV)
 
 // Middlewares
 app.use(cors());

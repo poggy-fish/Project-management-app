@@ -20,7 +20,11 @@ const createTask = async (req, res) => {
             description,
         });
 
-        await newTask.save();
+        const task = await newTask.save();
+        const userTasks = user.tasks;
+        if (task._id === user._id ) {
+            userTasks.push(task)
+        }
         const tasks = await Task.find();
         res.status(201).json(tasks);
     } catch (error) {
@@ -40,8 +44,9 @@ const getTasks = async (req, res) => {
 const getUserTasks = async (req, res) => {
     try {
         const { userId } = req.params;
-        const tasks = await Task.find({ userId });
-        res.status(200).json(tasks);
+        const user = User.findById({ userId });
+        const task = await Task.find({ userId });
+        res.status(200).json(task);
     } catch (error) {
         res.status(404).json({ msg: error.message });
     }

@@ -9,8 +9,8 @@ const password = encodeURIComponent("2154400191");
 //Set up database connection
 const connectDb = async () => {
     try {
-        const dbUrl = `mongodb+srv://johnsonabsolu:${password}@cluster0.n0kv6sd.mongodb.net/`;
-        await mongoose.connect(dbUrl, {
+
+        await mongoose.connect(process.env.DATABSE_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });

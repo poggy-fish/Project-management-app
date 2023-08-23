@@ -11,8 +11,7 @@ const userSchema = mongoose.Schema({
     },
     title: {
         type: String,
-        default: 'Task Manager',
-        requred: true,
+        required: true,
     },
     location: {
         type: String,
@@ -55,7 +54,7 @@ const userSchema = mongoose.Schema({
     },
     team: {
         type: Array,
-        defsult: [],
+        default: [],
     },
     teammates: {
         type: Array,
