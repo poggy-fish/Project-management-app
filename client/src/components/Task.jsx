@@ -6,6 +6,7 @@ import FlexBetween from './FlexBetween';
 import NewPost from './newPost';
 import PostsFeeds from './PostsFeeds';
 import { useDispatch, useSelector } from "react-redux";
+import CreateTaskModal from './CreateTaskModal';
 
 const TaskComponent = ({ taskCreator, date, title, description, comments, isCompleted, priority }) => {
     const user = useSelector((state) => state.user);
@@ -51,7 +52,7 @@ const TaskComponent = ({ taskCreator, date, title, description, comments, isComp
             p: "1rem",
             borderRadius: "5px",
           }}>
-            {userTasks ?
+            {userTasks && userTasks.userId == user._id ? 
                 userTasks.map((task) => (
                     <Box>
                         <FlexBetween pb="0.75rem">
@@ -158,7 +159,12 @@ const TaskComponent = ({ taskCreator, date, title, description, comments, isComp
                             <NewPost />
                         </Box>
                 </Box>
-                )) : ""
+                )) : (
+                    <Box>
+                        <Typography>You do not have any tasks.</Typography>
+                        <CreateTaskModal />
+                    </Box>
+                )
             }
         </Box>
     )

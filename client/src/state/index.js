@@ -31,7 +31,7 @@ export const authSlice = createSlice({
     },
     setUserTasks: (state, action) => {
       if (state.user) {
-        state.user.tasks = action.payload.tasks;
+        state.user.assignedTasks = action.payload.assignedTasks;
       } else {
         console.error("User has no tasks.");
       }

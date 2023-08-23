@@ -1,20 +1,49 @@
 import * as React from "react";
-import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import TaskComponent from "./Task";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 
-const UserComponent = ({ profilePic, fullName, userTitle, userLocation, userTasks }) => {
+const UserComponent = ({ profilePic, fullName, userTitle, userLocation, tasksByUser }) => {
     const user = useSelector((state) => state.user);
-    const assignedTasks = useSelector( (state) => state.user.tasks );
+    const [userTasks, setUserTasks] = useState();
     const userFullName = `${user.firstName} ${user.lastName}`;
 // MEDIA QUERRIES
     const isMobile = useMediaQuery("(max-width: 600px)");
+
+    const dispatch = useDispatch();
+
+    const getUserTasks = async () => {
+        try {
+            const response = await fetch(`http://localhost:3100/tasks/${user._id}`, {
+                method: "GET",
+                "content-type": "application/json"
+            });
+            const data = await response.json();
+            setUserTasks(data);
+        } catch (error) {
+            console.error(`There was an error ${error}`);
+        }
+    }
+
+    useEffect(() => {
+        getUserTasks()
+    }, []);
+
+    let numOfTasks = null;
+
+    if (userTasks) {
+      userTasks.map( (task) => {
+        if (user._id === task._id) {
+          alert(task._id)
+          numOfTasks = userTasks.length;
+        }
+      })
+    }
 
 return (
     <Box
@@ -80,7 +109,7 @@ return (
             </Box>
             <Box sx={{ display: "flex", gap: "0.5rem" }}>
               <AssignmentOutlinedIcon />
-              <Typography fontWeight="300" variant="p"> Tasks: { userTasks = assignedTasks.length }</Typography>
+              <Typography fontWeight="300" variant="p"> Tasks: { tasksByUser = numOfTasks }</Typography>
             </Box>
             </Box>
         </Box>
